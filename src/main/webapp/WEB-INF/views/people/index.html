@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+    <!-- Определяем кодировку страницы и название -->
     <meta charset="UTF-8">
     <title>Список всех людей</title>
 </head>
 <body>
 
+<!-- Перебираем коллекцию людей, переданную из контроллера -->
 <div th:each="person : ${people}">
-<a th:href="@{/people/{id}(id=${person.getPerson_id()})}"
-   th:text="${person.getName()+', '+ person.getYear()}">user</a>
+    <!-- Создаем ссылку на страницу с подробной информацией о человеке -->
+    <!-- th:href генерирует URL вида /people/{id}, где {id} заменяется на ID человека -->
+    <!-- th:text вставляет текст в ссылку, состоящий из имени и года человека -->
+    <a th:href="@{/people/{id}(id=${person.getPersonId()})}"
+       th:text="${person.getName() + ', ' + person.getYear()}">user</a>
 </div>
+
+<!-- Разделитель и ссылка на страницу добавления нового человека -->
 <br/>
 <hr/>
 
+<!-- Ссылка на страницу добавления нового человека -->
 <a href="/people/new">Добавить человека</a>
+
 </body>
 </html>

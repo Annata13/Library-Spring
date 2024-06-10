@@ -3,35 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Страница человека</title>
+    <!-- Заголовок страницы -->
 </head>
 <body>
 
+<!-- Отображение имени и года человека -->
 <p  th:text="${'ФИО: ' + person.getName() + ', '+ person.getYear()}">VALUE </p>
 
+<!-- Блок, отображаемый, если человек не взял ни одной книги -->
 <div style="    padding-bottom: 11px;
     border-bottom: 2px solid #a59b8fc2;"
-        th:if="${books.isEmpty()}">
+     th:if="${books.isEmpty()}">
     <p>Человек пока не взял ни одной книги</p>
 </div>
 
+<!-- Блок, отображаемый, если человек взял хотя бы одну книгу -->
 <div style="    padding-bottom: 15px;
     border-bottom: 2px solid #a59b8fc2;
         padding-top: 15px;
     border-top: 2px solid #a59b8fc2;"
-        th:if="${not books.isEmpty()}">
+     th:if="${not books.isEmpty()}">
     <div style="font-weight: bold">Книги:</div>
+    <!-- Отображение каждой книги, которую взял человек -->
     <div th:each="book : ${books}"
          th:text="${book.getName()+', ' + book.getAuthor() + ', ' +  book.getYear()}"
     >
     </div>
 </div>
 
-<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getPerson_id()})}">
+<!-- Форма для редактирования информации о человеке -->
+<form th:method="GET" th:action="@{/people/{id}/edit(id=${person.getPersonId()})}">
     <br/>
     <input type="submit" value="Редактировать">
 </form>
 
-<form th:method="DELETE" th:action="@{/people/{id} (id=${person.getPerson_id()})}">
+<!-- Форма для удаления информации о человеке -->
+<form th:method="DELETE" th:action="@{/people/{id} (id=${person.getPersonId()})}">
     <br/>
     <input type="submit" value="Удалить">
 </form>

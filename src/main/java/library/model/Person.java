@@ -4,16 +4,18 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.List;
 
 @Entity
-@Table(name = "Person")
+@Table(name = "person")
 public class Person {
     @Id
     @Column(name = "person_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int person_id;
+    private int personId;
 
     @NotEmpty(message = "Name should not be empty") //запрет пустого имени
     @Size(min=2, max=50, message = "Name should be between 2 and 50 characters") //диапазон символов в имени
@@ -24,7 +26,8 @@ public class Person {
     @Column(name = "year")
     private int year;
 
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER)
+    @Fetch(FetchMode.JOIN)
     private List<Book> books;
 
     public Person( String name, int year) {
@@ -35,12 +38,12 @@ public Person(){
 
 }
 
-    public int getPerson_id() {
-        return person_id;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
     public @NotEmpty(message = "Name should not be empty") @Size(min = 2, max = 50, message = "Name should be between 2 and 50 characters") String getName() {
@@ -73,7 +76,7 @@ public Person(){
         return "Person{" +
                 "year=" + year +
                 ", name='" + name + '\'' +
-                ", person_id=" + person_id +
+                ", person_id=" + personId +
                 '}';
     }
 }

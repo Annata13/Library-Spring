@@ -5,7 +5,7 @@
     <title>Страница изменения книги</title>
 </head>
 <body>
-<form th:method="PATCH" th:action="@{/books/{id}(id=${book.getBook_id()})}"
+<form th:method="PATCH" th:action="@{/books/{id}(id=${book.getBookId()})}"
       th:object="${book}">
 
     <label for="name">Введите название книги:</label>

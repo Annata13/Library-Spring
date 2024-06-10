@@ -6,12 +6,12 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "Book")
+@Table(name = "book")
 public class Book {
     @Id
     @Column(name = "book_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int book_id;
+    private int bookId;
 
     @NotEmpty(message = "Name should not be empty") //запрет пустого имени
     @Size(min=2, max=50, message = "Name should be between 2 and 50 characters") //диапазон символов в имени
@@ -27,7 +27,7 @@ public class Book {
     private String author;
 
     @ManyToOne
-    @JoinColumn(name = "person_id", referencedColumnName = "book_id")
+    @JoinColumn(name = "person_id", referencedColumnName = "person_id")
     private Person owner;
 
     public Book( String name, int year, String author) {
@@ -70,12 +70,12 @@ public class Book {
         this.name = name;
     }
 
-    public int getBook_id() {
-        return book_id;
+    public int getBookId() {
+        return bookId;
     }
 
-    public void setBook_id(int book_id) {
-        this.book_id = book_id;
+    public void setBookId(int book_id) {
+        this.bookId = book_id;
     }
 
     @Override
@@ -84,7 +84,7 @@ public class Book {
                 "author='" + author + '\'' +
                 ", year=" + year +
                 ", name='" + name + '\'' +
-                ", book_id=" + book_id +
+                ", book_id=" + bookId +
                 '}';
     }
 }

@@ -12,14 +12,14 @@ public interface  PeopleRepository extends JpaRepository<Person, Integer> {
     List<Person> findByName(String name); //Name - это поле в классе Person
 
     //Ищем людей по имени и сортируем по возрасту
-    List<Person> findByNameOrderByAge(String age);
+    List<Person> findByNameOrderByYear(String name);
 
-    //Ищем людей  по емаил
-    List<Person> findByEmail(String email);
+    //Ищем людей  по году
+    List<Person> findByYear(Integer year);
 
     //ищем людей по первой букве в имени
     List<Person> findByNameStartingWith(String startingWith); //передаем букву или несколько букв имени по которым будем искать
 
     //метод возвращает людей по имени или адрессу электронной почты
-    List<Person> findByNameOrEmail(String name, String email );
+   // List<Person> findByNameOrEmail(String name, String email );
 }
